@@ -1,0 +1,497 @@
+{
+	"info": {
+		"_postman_id": "34cb4637-307d-4c68-8acc-ea0804dac5b8",
+		"name": "Vasten CLI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login API",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "cli-secret",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "cli-client",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8092/oauth/token?username=nikita.gandhewar@gmail.com&grant_type=password&password=nikita",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"oauth",
+						"token"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "nikita.gandhewar@gmail.com"
+						},
+						{
+							"key": "grant_type",
+							"value": "password"
+						},
+						{
+							"key": "password",
+							"value": "nikita"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get loggedIn user",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 21832d70-6b62-441e-a667-49a5765a8803",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8092/loggedIn",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"loggedIn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API to create client",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\" : \"TechGig\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8092/api/client",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"api",
+						"client"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API to create user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\" : \"nikita.gandhewar1@gmail.com\",\n\t\"password\" : \"nikita\",\n\t\"clients\" : {\n\t\t\"id\" : 1\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8092/api/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create deployment API (Provision API)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer a55f7b6c-b54a-4925-bd09-2e5e18977fe3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\" : \"newdemovasten53-cluster\",\n\t\"clusterNodes\" : 2,\n\t\"toolVersion\" : \"latest\",\n\t\"clusterMachineType\" : \"n1-standard\",\n\t\"clusterLocalStoreCapacity\" : 30,\n\t\"nfsCapacity\" : 1024,\n\t\"clusterMachineCores\" : 3\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8092/api/provision",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"api",
+						"provision"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get status of deployment",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 21832d70-6b62-441e-a667-49a5765a8803",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8092/api/status/name/ekscluster",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"api",
+						"status",
+						"name",
+						"ekscluster"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get profile of deployment ",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 21832d70-6b62-441e-a667-49a5765a8803",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8092/api/profile?name=ekscluster",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"api",
+						"profile"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "ekscluster"
+						}
+					]
+				},
+				"description": "Get profile of deployment with user id and deployment name as well"
+			},
+			"response": []
+		},
+		{
+			"name": "Create client API using VM ip",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\" : \"TechsolPvt. Ltd.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://35.212.206.2:8092/api/client",
+					"protocol": "http",
+					"host": [
+						"35",
+						"212",
+						"206",
+						"2"
+					],
+					"port": "8092",
+					"path": [
+						"api",
+						"client"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create user API using VM ip",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\" : \"nikita.gandhewar@scriptuit.com\",\n\t\"password\" : \"nikita\",\n\t\"clients\" : {\n\t\t\"id\" : 38\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://35.212.206.2:8092/api/user",
+					"protocol": "http",
+					"host": [
+						"35",
+						"212",
+						"206",
+						"2"
+					],
+					"port": "8092",
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login API using VM ip",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "cli-secret",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "cli-client",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://35.212.206.2:8092/oauth/token?username=nikita.gandhewar@scriptuit.com&grant_type=password&password=nikita",
+					"protocol": "http",
+					"host": [
+						"35",
+						"212",
+						"206",
+						"2"
+					],
+					"port": "8092",
+					"path": [
+						"oauth",
+						"token"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "nikita.gandhewar@scriptuit.com"
+						},
+						{
+							"key": "grant_type",
+							"value": "password"
+						},
+						{
+							"key": "password",
+							"value": "nikita"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create provision API using VM ip",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer efd1de21-b17d-4333-a121-7aeb124712ac",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\" : \"newdemovasten52-cluster\",\n\t\"clusterNodes\" : 2,\n\t\"toolVersion\" : \"latest\",\n\t\"clusterMachineType\" : \"n1-standard\",\n\t\"clusterLocalStoreCapacity\" : 30,\n\t\"nfsCapacity\" : 1024\n}"
+				},
+				"url": {
+					"raw": "http://35.212.206.2:8092/api/provision",
+					"protocol": "http",
+					"host": [
+						"35",
+						"212",
+						"206",
+						"2"
+					],
+					"port": "8092",
+					"path": [
+						"api",
+						"provision"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete deployment API ",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer a55f7b6c-b54a-4925-bd09-2e5e18977fe3",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8092/api/name/cluster4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"api",
+						"name",
+						"cluster4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete deployment api using VM ip",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer efd1de21-b17d-4333-a121-7aeb124712ac",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://35.212.206.2:8092/api/name/newcluster12345",
+					"protocol": "http",
+					"host": [
+						"35",
+						"212",
+						"206",
+						"2"
+					],
+					"port": "8092",
+					"path": [
+						"api",
+						"name",
+						"newcluster12345"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get status API using VM ip",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://35.212.206.2:8092/api/status/name/newdemovasten52-cluster",
+					"protocol": "http",
+					"host": [
+						"35",
+						"212",
+						"206",
+						"2"
+					],
+					"port": "8092",
+					"path": [
+						"api",
+						"status",
+						"name",
+						"newdemovasten52-cluster"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
